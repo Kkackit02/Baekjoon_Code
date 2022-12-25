@@ -1,10 +1,10 @@
 #include<iostream>
-
 using namespace std;
 
 
 int main(void)
 {
-	cout<<"Hello, Roka"<<endl;
-	
+
+	cout<<"hello Christmas"<<endl;
+    return 0;
 }
