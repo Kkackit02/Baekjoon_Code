@@ -1,10 +1,17 @@
 #include<iostream>
+#include<string>
+#include<stack>
+
 using namespace std;
+
 
 
 int main(void)
 {
-
-	cout<<"hello Christmas"<<endl;
+	int T;
+	stack<char> stack;
+	
+	
     return 0;
+	
 }
