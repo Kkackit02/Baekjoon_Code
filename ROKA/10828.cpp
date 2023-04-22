@@ -3,7 +3,9 @@
 #include<stack>
 
 using namespace std;
-
+//4월 22일 출석인데
+//대체 웨 않대?
+//?? 왜 스택에 푸시가 안되는거징????  모징??
 
 
 int main(void)
@@ -13,18 +15,16 @@ int main(void)
 	stack<int> stack;
 	string func;
 	cin>>T;
-	stack.push(2);
 	for(int i = 0; i < T; i++)
 	{
 		cin>>func;
-		cout<<"!"<<func<<"!"<<endl;
-		if(func == "push")
+		if(func.compare("push") == 0)
 		{
-			scanf("%d" , &value);
+			cin>>value;
 			
 			stack.push(value);
 		}
-		else if(func == "top")
+		else if(func.compare("top") == 0)
 		{
 			if(stack.empty())
 			{
@@ -36,11 +36,11 @@ int main(void)
 			}
 			
 		}
-		else if(func == "size")
+		else if(func.compare("size") == 0)
 		{
 			cout<<stack.size()<<'\n'; 
 		}
-		else if(func == "empty")
+		else if(func.compare("empty") == 0)
 		{
 			if(stack.empty())
 			{
@@ -51,7 +51,7 @@ int main(void)
 				cout<<"0"<<'\n';
 			}
 		}
-		else if(func == "pop");
+		else if(func.compare("pop") == 0)
 		{
 			stack.pop();
 		}
