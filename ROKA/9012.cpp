@@ -11,64 +11,58 @@ using namespace std;
 int main(void)
 {
 	int T;
-	stack<char> stack;
 	
-	queue<string> result;
 	
 	
 	string Result[10000];
 	
 	
 	cin>>T;
-	
+	getchar();
 	for(int i = 0; i<T; i++)
 	{
-		deque<char> q;
+		
+		stack<char> stack;
 		while(true)
 		{
 			char key;
 			key = getchar();
-
-			if(key == '\n')
+			if(key == '(')
 			{
-				break;
+				stack.push(key);
 			}
-			q.push_front(key);
-		}
 			
-		
-		if(q.size()%2 == 1) // 문자열이 홀수면 반드시 VPS가 아님.
-		{
-			cout<< i << " : " << q.size()<<endl;
-			result.push("NO");
-			continue;
-		}
-		
-		while(!q.empty())
-		{
-			if(q.front() == q.back())
+			else if(key == ')')
 			{
-				cout<<"front = " << q.front() << ", back = " << q.back() << endl;
-				result.push("NO");
-				break;
+				if(stack.empty())
+				{
+					cout<<"NO"<<'\n';
+					while(key != '\n')
+						key = getchar();
+						break;
+				}
+				stack.pop();
 			}
-			q.pop_front();
-			q.pop_back();
 			
-		}
-		if(q.empty())
-		{
-			result.push("YES");
+			else if(key == '\n')
+			{
+				if(stack.empty())
+				{
+					cout<<"YES"<<'\n';
+					break;
+				}
+				else
+				{
+					cout<<"NO"<<'\n';
+					break;
+				}
+			}
+			
+			
 		}
 		
 	}
 	
-	
-	for(int i = 0; i<T; i++)
-	{
-		cout<<result.front()<<"\n";
-		result.pop();
-	}
 	
 	
     return 0;
