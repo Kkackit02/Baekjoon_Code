@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-//2442 별찍기 5
 
 
 int main(void)
