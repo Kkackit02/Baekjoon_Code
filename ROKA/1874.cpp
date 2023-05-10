@@ -12,30 +12,34 @@ int main(void)
 	queue<char> result;
 	int T = 0;
 	
-	int count = 1;
+	int count = 2;
+	stack.push(1);
+	result.push('+');
 	for(int i = 0; i<n; i++)
 	{
 		cin>>T;
 		while(true)
 		{
+
+			if(stack.empty() == false)
+			{
+				if(stack.top() == T)
+				{
+					stack.pop();
+					result.push('-');
+					continue;
+				}
+			}
 			if(count <= T)
 			{
 				stack.push(count);
 				count++;
 				result.push('+');
 			}
-			
-			
-			if(stack.top() == T)
+			else
 			{
-				stack.pop();
-				result.push('-');
 				break;
 			}
-			
-			q
-			
-			
 			
 		}
 		
@@ -43,17 +47,18 @@ int main(void)
 		
 	}
 	
+
 	int len = result.size();
 	
 	if(!stack.empty())
 	{
-		cout<<"NO"<<endl;
+		cout<<"NO"<<'\n';
 	}
 	else
 	{
 		for(int i =0; i< len; i++)
 		{
-			cout<<result.front()<<endl;
+			cout<<result.front()<<'\n';
 			result.pop();
 		}
 	}
