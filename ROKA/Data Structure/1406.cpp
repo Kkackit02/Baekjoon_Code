@@ -26,6 +26,9 @@ int main(void)
 	char Func;
 	char val;
 	list<char>::iterator iter = text.end();
+	
+	
+	
 	for(int i = 0; i<T; i++)
 	{
 		cin>>Func;
@@ -53,15 +56,18 @@ int main(void)
 		{
 			if(iter != text.begin())
 			{
-				text.erase(--iter);
+				iter--;
+				iter = text.erase(iter);
 			}
+			
 		}
 	}
 	
+	iter = text.begin();  
 	for(int i = 0; i < text.size(); i++)
 	{
-     	iter = text.begin();   
-		cout << *iter << " ";
+     	 
+		cout << *iter;
 		iter++; 
     }    
 	cout<<'\n';
