@@ -27,42 +27,48 @@ int bfs(int x)
 	while(!q.empty())
 	{
 		int sz=q.size(); // 깊이를 재기 위한 변수
-		int x = q.front();
-		q.pop();
 		
-		for(int i = 0; i<3; i++)
+		for(int z = 0; z < sz; z++)
 		{
-			
-			if(i < 2)
-			{
-				next_x = x + dx[i];
-			}
-			else
-			{
-				next_x = x * 2;
-			}
-			
-			cout<<"nextX = "<<next_x<<endl;
+			int x = q.front();
+			q.pop();
 
-			if(next_x < 0 || next_x > 100002 )
+			for(int i = 0; i<3; i++)
 			{
-				continue;
+
+				if(i < 2)
+				{
+					next_x = x + dx[i];
+				}
+				else
+				{
+					next_x = x * 2;
+				}
+
+				//cout<<"nextX = "<<next_x<<endl;
+
+				if(next_x < 0 || next_x > 100002 )
+				{
+					continue;
+				}
+				//cout<<"?"<<next_x<<":"<<graph[next_x]<<endl;
+				if(next_x == K)
+				{
+					cnt++;
+					return cnt;
+				}
+
+				if(!visited[next_x])
+				{
+					q.push(next_x);
+
+					visited[next_x] = true;
+				}
+
 			}
-			//cout<<"?"<<next_x<<":"<<graph[next_x]<<endl;
-			if(next_x == K)
-			{
-				return cnt;
-			}
-			
-			if(!visited[next_x])
-			{
-				q.push(next_x);
-				
-				visited[next_x] = true;
-				cnt++;
-			}
-			
 		}
+		cnt++;
+		
 		
 		
 	}
