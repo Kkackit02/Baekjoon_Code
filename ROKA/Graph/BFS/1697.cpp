@@ -81,6 +81,11 @@ int main(void)
 	
 	
 	cin>>N>>K;
+	if(N == K)
+	{
+		cout<<0<<endl;
+		return 0;
+	}
 	memset(graph, 0, sizeof(graph));
 	memset(visited, false, sizeof(visited));
 	graph[K] = 1;
