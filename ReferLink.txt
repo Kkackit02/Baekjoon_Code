@@ -12,6 +12,7 @@ https://www.acmicpc.net/workbook/view/1983
 백준 골드 루트
 https://velog.io/@arcokim/백준골드
 
+https://covenant.tistory.com/235
 
 <시간초과> 
 1. cin, cout, endl 사용금지(느림) printf, scanf, \n사용 
