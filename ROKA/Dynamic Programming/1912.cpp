@@ -12,6 +12,7 @@ int main(void)
 {
 	int T = 0;
 	int result = -1001;
+	int total = 0;
 	cin>>T;
 	
 	for(int i = 0; i<T; i++)
@@ -20,34 +21,17 @@ int main(void)
 	}
 	
 	int count = 0;
+	result = input[0];
+	memo[0] = input[0];
 	
-	for(int i =0; i<T; i++)
+	
+	for(int i =1; i<T; i++)
 	{
 		
-		if(input[i] < 0)
-		{
-			if(memo[count] != 0)
-			{
-				count++;
-			}
-			memo[count] = input[i];
-			count++;
-			
-		}
-		else
-		{
-			memo[count] += input[i];
-		}
+		memo[i] = max(memo[i-1] + input[i] , input[i]);
+		result = max(memo[i] , result);
 	}
 	
-	for(int i = 0; i<count; i++)
-	{
-		printf("i = %d , memo[i] = %d > result = %d\n",i, memo[i] , result);
-		if(memo[i] > result)
-		{
-			result = memo[i];
-		}
-	}
 	
 	cout<<result<<endl;
 	
