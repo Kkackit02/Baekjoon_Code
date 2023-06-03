@@ -13,6 +13,7 @@ int dy[] = {0,0,1,-1};
 
 int  N;
 
+int temp;
 int numberOfLand = 0;
 
 void bfs(int x, int y )
@@ -37,11 +38,11 @@ void bfs(int x, int y )
 			int next_y = y + dy[i];
 			
 		
-			if(next_x < 1 || next_x > N || next_y <1 || next_y > N)
+			if(next_x < 0 || next_x >= N || next_y <0 || next_y >= N)
 			{
 				continue;
 			}
-			if(graph[next_x][next_y] && visited[next_x][next_y] == false)
+			if(floodingLand[next_x][next_y] && !visited[next_x][next_y])
 			{
 				visited[next_x][next_y] = true;
 				//graph[next_x][next_y] = graph[x][y] + 1;
@@ -59,26 +60,21 @@ int main(void)
 	int maxWaterLevel = -1;
 	cin>>N;
 	
-	for(int i =1; i< N+1; i++)
+	for(int i =0; i< N; i++)
 	{
-		for(int j =1; j<N+1; j++)
+		for(int j =0; j<N; j++)
 		{
 			scanf("%1d" , &graph[i][j]);
 			maxWaterLevel = max(graph[i][j], maxWaterLevel);
 		}
 	}
 	
-	memset(visited, false, sizeof(visited));
 	
-	int temp = 0;
-	
-	
-	for(int h = 2; h < maxWaterLevel+1; h++)
+	for(int h = 0; h <= maxWaterLevel; h++)
 	{
-		temp = 0;
-		for (int i = 1; i < N+1; i++) 
+		for (int i = 0; i < N; i++) 
 		{
-            for (int j = 1; j < N+1; j++) 
+            for (int j = 0; j < N; j++) 
 			{
                 if (graph[i][j] < h) 
 				{
@@ -90,31 +86,35 @@ int main(void)
                 }
             }
         }
-	
-	
 		
-		for (int i = 1; i < N+1; i++) 
+		
+		
+		
+		
+		for (int i = 0; i < N; i++) 
 		{
-			for (int j = 1; j < N+1; j++) 
+			for (int j = 0; j < N; j++) 
 			{
-				//cout<<floodingLand[i][j];
 				if(floodingLand[i][j] && !visited[i][j])
 				{
 					bfs(i,j);
 					temp++;
-					cout<<i<<":"<<j<<":"<<temp<<endl;
 				}
 			}
-			//cout<<endl;
 		}	
+		
 		if(temp > numberOfLand)
 		{
 			numberOfLand = temp;
-			cout<<numberOfLand<<endl;
 		}
 		
-		memset(visited, false, sizeof(visited));
+		temp = 0;
+		
+		
 		memset(floodingLand, 0, sizeof(floodingLand));
+		memset(visited, 0, sizeof(visited));
+		
+			
 	}
 		
 	cout<<numberOfLand<<'\n';
