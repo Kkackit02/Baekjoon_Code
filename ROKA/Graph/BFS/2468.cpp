@@ -3,7 +3,7 @@
 using namespace std;
 
 
-#define MAX 100
+#define MAX 101
 int graph[MAX+1][MAX+1];
 int floodingLand[MAX+1][MAX+1];
 bool visited[MAX+1][MAX+1];
@@ -64,7 +64,10 @@ int main(void)
 	{
 		for(int j =0; j<N; j++)
 		{
-			scanf("%1d" , &graph[i][j]);
+			//scanf("%1d" , &graph[i][j]);
+			//1d로 하면 10 이상의 값이 들어올때 오류가 난다^^..
+			// -> cin>>graph[i][j];
+			cin>>graph[i][j];
 			maxWaterLevel = max(graph[i][j], maxWaterLevel);
 		}
 	}
