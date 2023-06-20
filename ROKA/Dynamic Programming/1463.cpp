@@ -9,55 +9,30 @@ using namespace std;
 
 //그리고 동적계획법을 쓰자!
 //연산 회수가 엄청 차이난다~
-long memo[1000000] {};
-int N;
-int count;
-int result = 10000;
-long func(long n, int count)
-{
-	if(memo[n] != 0)
-	{
-		return memo[n];
-	}
-	
-	
-	if(n == 1)
-	{
-		if(count < result)
-		{
-			result = count;
-		}
-		return count;
-	}
-	if(n < 1)
-	{
-		return -1;
-	}
-	else
-	{
-		count++;
-		if(n%3 == 0)
-		{
-			func(n/3, count);
-		}
-		if(n%2 == 0)
-		{
-			func(n/2, count);
-		}
-		func(n-1, count);
-	}
-	return 0;
-	
-}
-
 
 int main(void)
 {
 	int N = 0;
 	cin>>N;
 	
-	func(N, 0);
-	cout<<result<<'\n';
+	vector<int> memo(N+1);
+	
+	memo[1] = 0;
+	for(int i = 2; i<= N; i++)
+	{
+		memo[i] = memo[i-1] +1;
+		if(!(i%3))
+		{
+			memo[i] = min(memo[i] , memo[i/3] + 1);
+		}
+		if(!(i%2))
+		{
+			memo[i] = min(memo[i] , memo[i/2] + 1);
+		}
+		
+	}
+	
+	cout<<memo[N]<<"\n";
 	
 	
 }
