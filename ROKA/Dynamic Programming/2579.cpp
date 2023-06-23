@@ -10,8 +10,7 @@ int main(void)
 	cin>>N;
 	
 	int stair[301];
-	stair[0] = 0;
-	for(int i = 1; i <= N; i++)
+	for(int i = 0; i < N; i++)
 	{
 		cin>>stair[i];
 	}
@@ -19,33 +18,57 @@ int main(void)
 	vector<int> memo(N+1);
 	
 	memo[0] = stair[0];
-	memo[1] = stair[0] + stair[1];
-	int streak = 1;
-	for(int i = 1; i<= N; i++)
+	memo[1] = max(stair[1],  stair[0] + stair[1]);
+	memo[2] = max(stair[1]+stair[2] , stair[0] + stair[2]);
+	
+	for(int i = 3; i<N; i++)
 	{
-		if(memo[i-1] > memo[i-2])
+		memo[i] = max(memo[i-2] + stair[i] , memo[i-3] + stair[i-1] + stair[i]);
+	}
+	
+	cout<<memo[N-1]<<'\n';
+	/*
+	memo[0] = stair[N];
+	int i = 1;
+	int count = 0;
+	int streak = 1;
+	while(true)
+	{
+		if(N-i < 1)
 		{
-			streak++;
-			if(streak == 3)
+			break;
+		}
+		if(stair[N-i] > stair[N-i-1])
+		{
+			if(streak == 2)
 			{
-				streak = 1;	
-				memo[i] = memo[i-3] + stair[i];	
+				memo[count+1] = stair[N-i-1] + memo[count];
+				streak = 0;
+				i+=2;
 			}
 			else
 			{
-				memo[i] = memo[i-1] + stair[i];	
+				memo[count+1] = stair[N-i] + memo[count];
+				i+=1;
 			}
 			
+			streak++;
+				
 		}
-		else 
+		else
 		{
-			streak = 1;	
-			memo[i] = memo[i-2] + stair[i];	
+			memo[count+1] = stair[N-i-1] + memo[count];
+			i+=2;
+			streak = 0;
 		}
+		
+		count++;
 		
 	}
 	
-	cout<<memo[N]<<"\n";
+	
+	cout<<memo[count]<<"\n";
+	*/
 	
 	
 }
