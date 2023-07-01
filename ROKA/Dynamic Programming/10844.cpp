@@ -4,6 +4,8 @@ using namespace std;
 
 long long memo[10][100] {};
 
+//https://velog.io/write?id=6b9edc6f-c28c-45ac-8e13-25115db424ed
+
 /* 계단 아이디어 자체는 쉽게 떠올릴 수 있었다.
 한 차원 한 차원 내리면서 위아래로 계단수가 있는지 조사하면 됐다.
 그리고 어떤 값을 저장해서 다시 활용할지 생각해보니
