@@ -15,10 +15,10 @@ int main(void)
 	
 	int N;
 	int a, b;
-	int matrix[100000];
 	
 	int result = 1;//시험 1등은 무조건 선발되므로..
 	
+	int bestInterviewScore = 0;
 	
 	
 	
@@ -26,25 +26,26 @@ int main(void)
 	{
 		cin>>N;
 		
-		result = 1; 
+		result = 1; //서류 1등 채용
 		vector<pair<int,int>> v;
 		for(int j = 0; j < N; j++)
 		{
 			cin>>a>>b;
 			v.push_back(make_pair(a,b));
-			matrix[j] = j;
 		}
 		
 		
 		sort(v.begin(), v.end());
 		
-		for(int j = 1; j <= N; j++)
+		bestInterviewScore = v[0].second;
+		
+		
+		for(int j = 1; j < N; j++)
 		{
-			cout<<v[N-j].second<<":"<<v[N-j-1].second<<endl;
-			
-			if(v[N-j].second < v[N-j-1].second)
+			if(v[j].second < bestInterviewScore)
 			{
 				result++;
+				bestInterviewScore = v[j].second;
 			}
 		}
 		cout<<result<<endl;
