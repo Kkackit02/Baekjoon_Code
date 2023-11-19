@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 
 using namespace std;
-
+//https://www.acmicpc.net/board/view/86573
 
 int month[12] = {31,28,31,30,31,30,31,31,30,31,30,31}; 
 
@@ -10,6 +10,8 @@ int main(void)
 	int N;
 	cin>>N;
 	vector<pair<pair<int,int> , pair<int,int>>> v;
+	
+	
 	
 	int a, b, c, d;
 	for(int i = 0; i < N; i++)
@@ -22,81 +24,99 @@ int main(void)
 	
 	sort(v.begin(), v.end());
 	
+	/*
 	for(int i = 0; i < N; i++)
 	{
 		cout<<v[i].first.first<<":"<<v[i].first.second<<"-";
 		cout<<v[i].second.first<<":"<<v[i].second.second<<endl;
 	}
+	*/
+	//first.first = bloom_month
+	//first.second = bloom_day
+	//second.first = fall_month
+	//second.second = fall_day
 	
 	
-	int longerMonths = 3;
-	int longerDays = 1;
-	int longerIdx = 0;
+	int fall_month = 3;
+	int fall_day = 1;
+	
+	int best_idx = 0;
 	
 	int result = 0;
 	
-	
-	int flag = 0;
-	for(int i = 0; i<N; i++)
+	int flower_idx = 0;
+	bool isChecker = false;
+	while(true)
 	{
-		if(v[i].first.first < longerMonths)
+		isChecker = false;
+		for(int i = best_idx+1; i<N; i++)
 		{
-			flag = i;
-		}
-		else if(v[i].first.first == longerMonths)
-		{
-			if(v[i].first.second <= longerDays)
+			
+			if(v[i].first.first < fall_month)
 			{
-				flag = i;	
-			}
-		}
-	}
-	
-	
-	
-	vector <int> flower;
-	for(int i = flag; i < N; i++)
-	{
-		for(int j = longerIdx; j < flag; j++)
-		{
-			if(v[j].second.first > longerMonths)
-			{
-				longerIdx = i;
-				longerMonths = v[j].second.first;
-				longerDays = v[j].second.second;
-			}
-			else if(v[j].second.first == longerMonths)
-			{
-				if(v[j].second.second >= longerDays)
+				if(v[best_idx].second.first < v[i].second.first)
 				{
-					longerIdx = i;
-					longerMonths = v[j].second.first;
-					longerDays = v[j].second.second;
+					best_idx = i;
+					isChecker = true;
+				}
+				else if(v[best_idx].second.first == v[i].second.first)
+				{
+					if(v[best_idx].second.second < v[i].second.second)
+					{
+						best_idx = i;
+						isChecker = true;
+					}
+				}
+
+			}
+
+			else if(v[i].first.first == fall_month)
+			{
+				if(v[i].first.second <= fall_day)
+				{
+					if(v[best_idx].second.first < v[i].second.first)
+					{
+						best_idx = i;
+						isChecker = true;
+					}
+					else if(v[best_idx].second.first == v[i].second.first)
+					{
+						if(v[best_idx].second.second < v[i].second.second)
+						{
+							best_idx = i;
+							isChecker = true;
+						}
+					}
 				}
 			}
+			else
+			{
+				break;
+			}
+
 		}
-		flower.push_back(longerIdx);
 		
+		if(isChecker == true)
+		{
+			result++;
+		}
+		else
+		{
+			break;
+		}
+		
+
+		fall_month = v[best_idx].second.first;
+		fall_day = v[best_idx].second.second;
+
+		if(v[best_idx].second.first > 11)
+		{
+
+			break;
+		}
+
 	}
-		
-	for(int i = 0; i<flower.size(); i++)
-	{
-		
-		cout<<flower[i]<<endl;
-		
-	}
-	
-	/*
-	printf("%d : %d - %d : %d \n", 
-		   v[longerIdx].first.first ,
-		  v[longerIdx].first.second ,
-		  v[longerIdx].second.first ,
-		  v[longerIdx].second.second);
-		  */
 	
 	cout<<result<<endl;
-	
-	
-	
 	
 }
