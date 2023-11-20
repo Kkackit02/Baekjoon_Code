@@ -45,14 +45,32 @@ int main(void)
 	int result = 0;
 	
 	int flower_idx = 0;
-	bool isChecker = false;
-	while(true)
+	
+	
+	for(int i = best_idx+1; i<N; i++)
 	{
-		isChecker = false;
-		for(int i = best_idx+1; i<N; i++)
-		{
 			
-			if(v[i].first.first < fall_month)
+		if(v[i].first.first < fall_month)
+		{
+			if(v[best_idx].second.first < v[i].second.first)
+			{
+				best_idx = i;
+				isChecker = true;
+			}
+			else if(v[best_idx].second.first == v[i].second.first)
+			{
+				if(v[best_idx].second.second < v[i].second.second)
+				{
+					best_idx = i;
+					isChecker = true;
+				}
+			}
+
+		}
+
+		else if(v[i].first.first == fall_month)
+		{
+			if(v[i].first.second <= fall_day)
 			{
 				if(v[best_idx].second.first < v[i].second.first)
 				{
@@ -67,56 +85,9 @@ int main(void)
 						isChecker = true;
 					}
 				}
-
 			}
-
-			else if(v[i].first.first == fall_month)
-			{
-				if(v[i].first.second <= fall_day)
-				{
-					if(v[best_idx].second.first < v[i].second.first)
-					{
-						best_idx = i;
-						isChecker = true;
-					}
-					else if(v[best_idx].second.first == v[i].second.first)
-					{
-						if(v[best_idx].second.second < v[i].second.second)
-						{
-							best_idx = i;
-							isChecker = true;
-						}
-					}
-				}
-			}
-			else
-			{
-				break;
-			}
-
 		}
-		
-		if(isChecker == true)
-		{
-			result++;
-		}
-		else
-		{
-			break;
-		}
-		
-
-		fall_month = v[best_idx].second.first;
-		fall_day = v[best_idx].second.second;
-
-		if(v[best_idx].second.first > 11)
-		{
-
-			break;
-		}
-
-	}
 	
-	cout<<result<<endl;
+	}	
 	
 }
